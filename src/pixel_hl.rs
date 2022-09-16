@@ -20,19 +20,19 @@ impl Pixel {
     // Create new from RGBA
     pub fn new_from_rgba(r: u8, g: u8, b: u8, a: u8) -> Pixel {
         Pixel {
-            r: r,
-            g: g,
-            b: b,
-            a: a
+            r,
+            g,
+            b,
+            a
         }
     }
 
     // Create new from RGBA
     pub fn new_from_rgb(r: u8, g: u8, b: u8) -> Pixel {
         Pixel {
-            r: r,
-            g: b,
-            b: g,
+            r,
+            g,
+            b,
             a: 255
         }
     }
@@ -44,6 +44,15 @@ impl Pixel {
             g: ((buffer & (0x0000FF00)) >> 8) as u8,
             b: ((buffer & (0x00FF0000)) >> 16) as u8,
             a: ((buffer & (0xFF000000)) >> 24) as u8
+        }
+    }
+
+    pub fn new_from_color_array(array: [u8; 4]) -> Pixel {
+        Pixel{
+            r: array[0],
+            g: array[1],
+            b: array[2],
+            a: array[3]
         }
     }
 
@@ -64,11 +73,11 @@ impl Pixel {
         self.a = a;
     }
 
+    //Getters
     pub fn get_red(self: &Self) -> u8{
         self.r
     }
 
-    //Getters
     pub fn get_green(self: &Self) -> u8{
         self.g
     }
