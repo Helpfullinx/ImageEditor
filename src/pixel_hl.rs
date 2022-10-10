@@ -27,7 +27,7 @@ impl Pixel {
         }
     }
 
-    // Create new from RGBA
+    // Create new from RGB
     pub fn new_from_rgb(r: u8, g: u8, b: u8) -> Pixel {
         Pixel {
             r,
@@ -55,6 +55,11 @@ impl Pixel {
             a: array[3]
         }
     }
+
+    // pub fn get_as_byte(self: &mut Self) -> u32{
+    //     let byte:u32;
+    //     byte =
+    // }
 
     //Setters
     pub fn set_red(self: &mut Self, r: u8) {
