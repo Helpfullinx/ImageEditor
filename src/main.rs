@@ -1,13 +1,9 @@
 extern crate core;
 
-mod pixel_hl;
-mod image_hl;
-
 use std::borrow::Borrow;
 use image::{GenericImageView, open};
-use crate::image_hl::Image;
-use crate::pixel_hl::Pixel;
-
+use image_hl::{image_hl::Image};
+use image_editor_gui::new_window;
 
 fn main() {
     let dynamic_image = open("test.png").expect("File not found");
@@ -23,4 +19,6 @@ fn main() {
     let byte_buffer = image.convert_to_byte_buffer();
 
     image.save_image_data("image.data",&byte_buffer);
+
+    // new_window::new_window();
 }
