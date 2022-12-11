@@ -1,7 +1,7 @@
-use crate::image_hl::Image;
+use crate::image_hl::Imagehl;
 use rand::{Rng,thread_rng};
 
-impl Image{
+impl Imagehl{
     pub fn randomize(self: &mut Self){
         let mut rng = thread_rng();
         let rnx= rng.gen_range(0..self.get_width());

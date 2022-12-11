@@ -4,14 +4,14 @@ use std::io::Write;
 use image::{DynamicImage, GenericImageView};
 use crate::pixel_hl::Pixel;
 
-pub struct Image{
+pub struct Imagehl{
     width: u32,
     height: u32,
     pixels: Vec<Pixel>,
 }
 
-impl Image {
-    pub fn new_color_array(image: DynamicImage) -> Image{
+impl Imagehl {
+    pub fn new_color_array(image: DynamicImage) -> Imagehl{
         let mut image_buffer:Vec<Pixel> = Vec::new();
 
         for i in 0..(image.height()) {
@@ -22,7 +22,7 @@ impl Image {
             }
         }
 
-        Image {
+        Imagehl {
             width: image.width(),
             height: image.height(),
             pixels: image_buffer,
@@ -30,12 +30,13 @@ impl Image {
     }
 
     pub fn convert_to_byte_buffer(self: &mut Self) -> Vec<u8>{
-        let mut vec_buffer = Vec::with_capacity(self.pixels.len() * 3);
-        for i in 0..self.height as usize{
-            for j in 0..self.width as usize{
-                vec_buffer.push(self.get_pixel(i as u32,j as u32).get_red());
-                vec_buffer.push(self.get_pixel(i as u32,j as u32).get_green());
-                vec_buffer.push(self.get_pixel(i as u32,j as u32).get_blue());
+        let mut vec_buffer = Vec::with_capacity(self.pixels.len() * 4);
+        for i in 0..(self.height){
+            for j in 0..(self.width){
+                vec_buffer.push(self.get_pixel(j,i).get_red());
+                vec_buffer.push(self.get_pixel(j,i).get_green());
+                vec_buffer.push(self.get_pixel(j,i).get_blue());
+                vec_buffer.push(self.get_pixel(j,i).get_alpha());
             }
         }
         vec_buffer
