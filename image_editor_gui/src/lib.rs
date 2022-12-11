@@ -1,4 +1,4 @@
-pub mod new_window;
+pub mod init_app;
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right

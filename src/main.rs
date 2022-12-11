@@ -2,7 +2,7 @@ extern crate core;
 
 use std::borrow::Borrow;
 use image::{GenericImageView, open};
-use image_editor_gui::new_window;
+use image_editor_gui::init_app;
 use image_hl::image_hl::Imagehl;
 
 fn main() {
@@ -20,5 +20,5 @@ fn main() {
     //
     // image.save_image_data("image.data",&byte_buffer);
 
-    new_window::new_window();
+    init_app::init_app();
 }

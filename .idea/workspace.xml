@@ -19,15 +19,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec137de7-1b0f-4c81-bb79-3cb20b403577" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Checker.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Cyberpunk City.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Message.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/windows.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_editor_gui/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/image_editor_gui/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_editor_gui/src/new_window.rs" beforeDir="false" afterPath="$PROJECT_DIR$/image_editor_gui/src/new_window.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_hl/src/image_fx.rs" beforeDir="false" afterPath="$PROJECT_DIR$/image_hl/src/image_fx.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_hl/src/image_hl.rs" beforeDir="false" afterPath="$PROJECT_DIR$/image_hl/src/image_hl.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_editor_gui/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/image_editor_gui/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_editor_gui/src/new_window.rs" beforeDir="false" afterPath="$PROJECT_DIR$/image_editor_gui/src/init_app.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +44,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Cargo.toml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/image_editor_gui/src/new_window.rs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/image_editor_gui/src/init_app.rs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/image_hl/Cargo.toml" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/image_hl/src/image_fx.rs" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/image_hl/src/image_hl.rs" root0="SKIP_INSPECTION" />
@@ -197,7 +191,7 @@
       <workItem from="1670129450183" duration="440000" />
       <workItem from="1670129905312" duration="1000" />
       <workItem from="1670130338475" duration="11441000" />
-      <workItem from="1670742407107" duration="1000" />
+      <workItem from="1670742407107" duration="2279000" />
     </task>
     <servers />
   </component>

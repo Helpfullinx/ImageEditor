@@ -1,11 +1,10 @@
 use bevy::app::App;
 use bevy::{DefaultPlugins};
 use bevy::asset::Assets;
-use bevy::input::mouse::{MouseMotion, MouseScrollUnit, MouseWheel};
+use bevy::input::mouse::{MouseMotion, MouseWheel};
 use bevy::math::{Vec2, Vec3};
 use bevy::prelude::*;
 use bevy::render::render_resource::{Extent3d, TextureDimension, TextureFormat};
-use bevy::render::texture::{ImageSampler};
 use bevy::sprite::{ColorMaterial, MaterialMesh2dBundle, };
 use bevy::utils::default;
 use bevy_inspector_egui::{Inspectable, WorldInspectorPlugin};
@@ -14,19 +13,20 @@ use image_hl::image_hl::Imagehl;
 use image::{open};
 
 
-pub fn new_window(){
+pub fn init_app(){
     App::new()
         .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
         .add_plugin(DebugLinesPlugin::default())
         .add_plugin(WorldInspectorPlugin::default())
         .add_startup_system(setup)
+        .add_system(pan)
         .add_system(scroll_scale)
         .add_system(check_scroll_bound)
         .run();
 }
 
 #[derive(Component,Inspectable,Default)]
-struct Scalable;
+struct Camera;
 
 fn setup(
     mut commands: Commands,
@@ -54,7 +54,7 @@ fn setup(
 
     let image_handle = textures.add(image);
 
-    commands.spawn((Camera2dBundle::default(), Scalable));
+    commands.spawn((Camera2dBundle::default(), Camera));
 
     // commands.spawn((Bun))
 
@@ -69,7 +69,7 @@ fn setup(
 
 fn scroll_scale(
     mut scroll_events: EventReader<MouseWheel>,
-    mut query: Query<&mut Transform, With<Scalable>>,
+    mut query: Query<&mut Transform, With<Camera>>,
 ){
     for e in scroll_events.iter(){
         let scale = Vec3::new(0.1 ,0.1,0.0);
@@ -80,13 +80,11 @@ fn scroll_scale(
         } else if e.y < 0.0 {
             t.scale += scale;
         }
-
-
     }
 }
 
 fn check_scroll_bound(
-    mut query: Query<&mut Transform, With<Scalable>>
+    mut query: Query<&mut Transform, With<Camera>>
 ){
     let mut t = query.single_mut();
 
@@ -98,12 +96,18 @@ fn check_scroll_bound(
 }
 
 fn pan(
-    input: Res<Input<MouseButton>>
+    input: Res<Input<MouseButton>>,
+    mut motion_event: EventReader<MouseMotion>,
+    mut query: Query<&mut Transform, With<Camera>>
 ){
-    if input.just_pressed(MouseButton::Right) {
+    let mut t = query.single_mut();
 
+    if input.pressed(MouseButton::Middle) {
+        for e in motion_event.iter() {
+            t.translation.x -= e.delta.x * t.scale.x;
+            t.translation.y += e.delta.y * t.scale.y;
+        }
     }
-
 }
 
 
@@ -112,9 +116,9 @@ fn pan(
 
 //TODO UI Elements
 
-//TODO Tools (paint brush, move tool, effects)
-
 //TODO Drag and Drop fuctionallity
+
+//TODO Tools (paint brush, move tool, effects)
 
 //TODO Color wheel / color picking
 
