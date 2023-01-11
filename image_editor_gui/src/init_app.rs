@@ -5,6 +5,7 @@ use bevy::input::mouse::{MouseMotion, MouseWheel};
 use bevy::math::{Vec2, Vec3};
 use bevy::prelude::*;
 use bevy::render::render_resource::{Extent3d, TextureDimension, TextureFormat};
+use bevy::scene::SceneInstance;
 use bevy::sprite::{ColorMaterial, MaterialMesh2dBundle, };
 use bevy::utils::default;
 use bevy_inspector_egui::{Inspectable, WorldInspectorPlugin};
@@ -19,20 +20,44 @@ pub fn init_app(){
         .add_plugin(DebugLinesPlugin::default())
         .add_plugin(WorldInspectorPlugin::default())
         .add_startup_system(setup)
+        .add_system(load_image)
         .add_system(pan)
         .add_system(scroll_scale)
         .add_system(check_scroll_bound)
+        .add_system(file_drop)
         .run();
 }
 
 #[derive(Component,Inspectable,Default)]
 struct Camera;
+#[derive(Component,Inspectable,Default)]
+struct World_Properties {
+    num_layers: i8,
+}
 
 fn setup(
+    mut commands: Commands,
+){
+    commands.spawn(World {
+        id: val,
+        entities: val,
+        components: val,
+        archetypes: val,
+        storages: val,
+        bundles: val,
+        removed_components: val,
+        archetype_component_access: val,
+        main_thread_validator: val,
+        change_tick: val,
+        last_change_tick: val });
+}
+
+fn load_image(
     mut commands: Commands,
     mut textures: ResMut<Assets<Image>>,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
+    mut query: Query<&mut Scene_Properties, With<Scene_Properties>>
 ){
     let dynamic_image = open("Message.png").expect("File not found");
 
@@ -54,9 +79,12 @@ fn setup(
 
     let image_handle = textures.add(image);
 
-    commands.spawn((Camera2dBundle::default(), Camera));
-
-    // commands.spawn((Bun))
+    commands.spawn((Camera2dBundle{
+        transform: Transform::from_xyz(0.0,0.0,0.0),
+        ..default()
+        },
+        Camera
+    ));
 
     commands.spawn((MaterialMesh2dBundle {
         mesh: meshes.add(Mesh::from(shape::Quad::new(Vec2::new(image_width, image_height)))).into(),
@@ -65,6 +93,17 @@ fn setup(
         ..default()
         },
     ));
+}
+
+fn file_drop(
+    mut dnd_evr: EventReader<FileDragAndDrop>,
+){
+    for e in dnd_evr.iter(){
+        println!("{:?}",e);
+        if let FileDragAndDrop::DroppedFile {id,path_buf} = e {
+            println!("Dropped file with path: {:?}, in window id: {:?}", path_buf, id)
+        }
+    }
 }
 
 fn scroll_scale(
